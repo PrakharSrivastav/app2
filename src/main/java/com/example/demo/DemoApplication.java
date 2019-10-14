@@ -10,12 +10,20 @@ import zipkin2.reporter.AsyncReporter;
 import zipkin2.reporter.Sender;
 import zipkin2.reporter.okhttp3.OkHttpSender;
 
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+
 
 @SpringBootApplication
 public class DemoApplication {
     @Bean
     public Sender sender() {
         return OkHttpSender.create("http://localhost:9411/api/v2/spans");
+    }
+
+    @Bean
+    public Client client() {
+        return ClientBuilder.newClient();
     }
 
     @Bean
